@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="APIRequest\Course\" />
+  </ItemGroup>
+
 </Project>

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ElasticSearch_Libary\ElasticSearch_Libary.csproj" />
     <ProjectReference Include="..\ElearningProjectRepository\ElearningProjectRepository.csproj" />
     <ProjectReference Include="..\Models\ElearningProjectModels.csproj" />
   </ItemGroup>

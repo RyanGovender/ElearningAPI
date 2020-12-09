@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElearningProjectBusiness.Implementation.Global;
 using ElearningProjectModels.Models;
 using ElearningProjectRepository.Implementation;
 using ElearningProjectServices.Interface;
@@ -44,6 +45,7 @@ namespace ElearningProjectAdminAPI.Controllers
         {
             if (learningPath == null) return StatusCode(400);
             var result = await _unitOfWork.LearningPathService.Update(learningPath);
+            Elastic.LogInformation(learningPath,learningPath);
             return result ? StatusCode(200, result) : StatusCode(400, result);
         }
 

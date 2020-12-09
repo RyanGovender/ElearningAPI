@@ -7,7 +7,8 @@ namespace ElearningProjectDAL.DAL
 {
     public class DataService
     {
-        private static readonly string _sqlConnection = "Server=(LocalDb)\\MSSQLLocalDB;initial catalog=ElearningDB;Trusted_Connection=True;";
+        //Server= localhost; Database= ElearningDB; Integrated Security=True;//Server=(LocalDb)\\MSSQLLocalDB;initial catalog=ElearningDB;Trusted_Connection=True;
+        private static readonly string _sqlConnection = "Server= localhost; Database= ElearningDB; Integrated Security=True;";
 
         public static SqlConnection SqlConnection()
         {

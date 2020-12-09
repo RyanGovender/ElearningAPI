@@ -1,4 +1,8 @@
-﻿using ElearningProjectModels.Models;
+﻿using ElasticSearch_Libary.Interface;
+using ElasticSearch_Libary.Logic;
+using ElearningProjectBusiness.Implementation.Global;
+using ElearningProjectModels.Logging;
+using ElearningProjectModels.Models;
 using ElearningProjectRepository.Implementation;
 using ElearningProjectServices.Interface;
 using System;
@@ -14,6 +18,7 @@ namespace ElearningProjectServices.Services
     public class LearningPathService : ILearningPathService
     {
         private IUnitOfWork _iUnitOfWork;
+        
         public LearningPathService(IUnitOfWork unitOfWork)
         {
             _iUnitOfWork = unitOfWork;
@@ -25,7 +30,12 @@ namespace ElearningProjectServices.Services
 
         public async Task<IQueryable<LearningPath>> GetAll()
         {
-            return await _iUnitOfWork.LearningPathRepository.GetAllAsync();
+            var result = await _iUnitOfWork.LearningPathRepository.GetAllAsync();
+            //ElasticLogic<LearningPath>.AddToIndex(result.Last(), "learningpath");
+            //ElasticLogic<ObjectLogger>.CreateIndex("insertupdatelogger");
+            var obj = ObjectCompare.CompareObjects(result.First(), result.Last());
+            
+            return result;
         }
 
         public async Task<bool> Inset(LearningPath data)

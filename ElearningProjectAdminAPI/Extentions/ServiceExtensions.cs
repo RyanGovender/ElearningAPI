@@ -1,4 +1,6 @@
-﻿using ElearningProjectBusiness.Implementation;
+﻿using ElasticSearch_Libary.Interface;
+using ElasticSearch_Libary.Logic;
+using ElearningProjectBusiness.Implementation;
 using ElearningProjectBusiness.Interface;
 using ElearningProjectRepository.Implementation;
 using ElearningProjectRepository.Interface;

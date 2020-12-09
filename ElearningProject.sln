@@ -13,9 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElearningProjectServices", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElearningProjectAdminAPI", "ElearningProjectAdminAPI\ElearningProjectAdminAPI.csproj", "{D1F0F839-ADCF-4823-88E0-A9DC2309C814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElearningProjectDAL", "DAL\ElearningProjectDAL.csproj", "{180D039C-6D63-409E-BD8D-A1608568BD0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElearningProjectDAL", "DAL\ElearningProjectDAL.csproj", "{180D039C-6D63-409E-BD8D-A1608568BD0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElearningProjectBusiness", "ElearningProjectBusiness\ElearningProjectBusiness.csproj", "{63B76D30-1B6E-4439-8841-2DACF9CFD8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElearningProjectBusiness", "ElearningProjectBusiness\ElearningProjectBusiness.csproj", "{63B76D30-1B6E-4439-8841-2DACF9CFD8DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ELearningProject.WindowsServices", "ELearningProject.WindowsServices", "{F7AD44AF-4655-473C-BBF4-8A061E90CC93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ELearningProject.Libaries", "ELearningProject.Libaries", "{96FD4527-2D02-4A51-8F84-BB6170801B7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch_Libary", "ElasticSearch_Libary\ElasticSearch_Libary.csproj", "{39FA39AF-519A-4A7A-A050-39315336778B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,16 @@ Global
 		{63B76D30-1B6E-4439-8841-2DACF9CFD8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63B76D30-1B6E-4439-8841-2DACF9CFD8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63B76D30-1B6E-4439-8841-2DACF9CFD8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FA39AF-519A-4A7A-A050-39315336778B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FA39AF-519A-4A7A-A050-39315336778B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FA39AF-519A-4A7A-A050-39315336778B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FA39AF-519A-4A7A-A050-39315336778B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{39FA39AF-519A-4A7A-A050-39315336778B} = {96FD4527-2D02-4A51-8F84-BB6170801B7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8F44BFE-8A30-400A-A3EB-455F971755F4}
