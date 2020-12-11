@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ElearningProjectBusiness.Implementation.Global
+namespace ElearningProjectRepository.Implementation.Global
 {
     public class Variance
     {
@@ -23,6 +23,7 @@ namespace ElearningProjectBusiness.Implementation.Global
         }
         public static StringBuilder CompareObjects<T>(T currentObject, T newObject) where T : class
         {
+            _stringBuilder.Clear();
             var fieldInfo = GetAllFields(currentObject.GetType());
             foreach (var item in fieldInfo)
             {

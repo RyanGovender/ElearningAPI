@@ -15,6 +15,12 @@ namespace ElearningProjectRepository.Implementation
         {
             _dapperBase = dapperBase;
         }
+
+        public Task<Course> Find(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IQueryable<Course>> GetAll()
         {
             throw new NotImplementedException();

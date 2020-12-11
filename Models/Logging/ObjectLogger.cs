@@ -6,12 +6,11 @@ namespace ElearningProjectModels.Logging
 {
    public class ObjectLogger
     {
-        public object CurrentObjectDetails { get; set; }
-        public object NewObjectDetails { get; set; }
+        public string ChangedObjectDetails { get; set; }
         public string UserID { get; set; }
         public string MethodName { get; set; }
         public string IPAdress { get; set; }
-        public object ResponseMessage { get; set; } // create a response class
-        public DateTime DateTime { get; set; }
+        public string ResponseMessage { get; set; } // create a response class
+        public DateTime CreatedDate { get; set; }
     }
 }

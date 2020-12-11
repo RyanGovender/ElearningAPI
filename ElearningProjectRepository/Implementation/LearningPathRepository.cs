@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ElearningProjectDAL.DAL;
 using ElearningProjectModels.Models;
+using ElearningProjectRepository.Implementation.Global;
 using ElearningProjectRepository.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ElearningProjectModels.Enum.Enum;
 
 namespace ElearningProjectRepository.Implementation
 {
@@ -19,7 +21,7 @@ namespace ElearningProjectRepository.Implementation
             _dapperBaseRepository = dapperbase;
         }
 
-        public async Task<bool> AddAsync(LearningPath model)
+        public async Task<int> Insert(LearningPath model)
         {
                 var parameters = new { 
                     model.Name,
@@ -30,29 +32,29 @@ namespace ElearningProjectRepository.Implementation
                    @CreateDate = DateTime.Now,
                    @ModifiedDate = DateTime.Now };
 
-            var result = await _dapperBaseRepository.ExecuteQuery("sp_AddLearningPath",parameters);
+            var result = await _dapperBaseRepository.Excute("sp_AddLearningPath",parameters);
 
             return result;
 
         }
 
-        public async Task<bool> DeleteAsync(int? id)
+        public async Task<int> DeleteAsync(int? id)
         {
             var parameters = new { @Id = id };
 
-            var result = await _dapperBaseRepository.ExecuteQuery("sp_DeleteLearningPath", parameters);
+            var result = await _dapperBaseRepository.Excute("sp_DeleteLearningPath", parameters);
 
             return result;
         }
 
-        public async Task<IQueryable<LearningPath>> GetAllAsync()
+        public async Task<IQueryable<LearningPath>> GetAll()
         {
             var result = await _dapperBaseRepository.Query<LearningPath>("sp_GetAllLearningPath", null);
 
             return result;
         }
 
-        public async Task<bool> UpdateAsync(LearningPath model)
+        public async Task<int> Update(LearningPath model)
         {
             var parameters = new
             {
@@ -64,10 +66,26 @@ namespace ElearningProjectRepository.Implementation
                 @ModifiedDate = DateTime.Now
             };
 
-            var result = await _dapperBaseRepository.ExecuteQuery("sp_UpdateLearningPath", parameters);
+
+
+            //execute find method to get current details  (async dont await) 
+            var currentObject = Find(model.Id);
+            var result = await _dapperBaseRepository.Excute("sp_UpdateLearningPath", parameters);
+            Elastic.LogInformation(await currentObject, model, ((Status)result).ToString(), "UpdateLearingPath");
+
+            //ObjectCompare
+            //object compare
+            //log here
 
             return result;
 
+        }
+
+        public async Task<LearningPath> Find(int? id)
+        {
+            var parameters = new { id };
+            var result = await _dapperBaseRepository.Query<LearningPath>("sp_GinericFind", parameters);
+            return result.Any() ? result.FirstOrDefault() : null ;
         }
     }
 }

@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ElearningProjectBusiness.Implementation.Global
+namespace ElearningProjectRepository.Implementation.Global
 {
     public static class Elastic
     {
-        private static readonly string _objectLoggerName = "insertupdatelogger";
+        private static readonly string _objectLoggerName = "objectchangelogger";
         //response from executed task
         //objectChangeDetails the result of the object compare
-        public static void LogInformation2<T>(T current, T newObject,string response,string methodName) where T : class
+        public static void LogInformation<T>(T current, T newObject, string response, string methodName) where T : class
         {
             var objectResult = ObjectCompare.CompareObjects(current, newObject).ToString();
             LogInformation(response, objectResult, methodName);
@@ -21,7 +21,7 @@ namespace ElearningProjectBusiness.Implementation.Global
         {
             var _loggingItem = new ObjectLogger() { 
                 CreatedDate = DateTime.Now,
-                ResponseMessage = response,
+                ResponseMessage =  response ,
                 ChangedObjectDetails = objectChangeDetails,
                 IPAdress = Network.GetLocalIPAddress(),
                 MethodName = methodName,

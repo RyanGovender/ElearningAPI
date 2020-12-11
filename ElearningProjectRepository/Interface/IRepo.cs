@@ -11,5 +11,6 @@ namespace ElearningProjectRepository.Interface
         Task<int> Insert(T model);
         Task<int> Update(T model);
         Task<IQueryable<T>> GetAll();
+        Task<T> Find(int?id);
     }
 }

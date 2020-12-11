@@ -36,7 +36,7 @@ namespace ElearningProjectServices.Services
                     SetResponseStatus(400, new { Message = "The request has failed", Code = 400 });
                     return _reponseStatus;
                 default:
-                    SetResponseStatus(500, new { Message = "The request has failed", Code = 400 });
+                    SetResponseStatus(500, new { Message = "The request has failed", Code = 500 });
                     return _reponseStatus;
             }
         }

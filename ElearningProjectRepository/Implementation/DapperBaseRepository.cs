@@ -46,10 +46,10 @@ namespace ElearningProjectRepository.Implementation
          
         }
 
-        public async Task<IQueryable<T>> Query<T>(string storeProcName, object parameters = null)
+        public async Task<IQueryable<T>> Query<T>(string storeProcName, object parameters)
         {
             try
-            {
+                {
                 using var _connection = DataService.SqlConnection();
                 var result = await _connection.QueryAsync<T>(storeProcName, parameters, commandType: CommandType.StoredProcedure);
                 return result.AsQueryable();

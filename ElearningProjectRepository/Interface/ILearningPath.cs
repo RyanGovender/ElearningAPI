@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ElearningProjectRepository.Interface
 {
-    public interface ILearningPath : IRepository<LearningPath>
+    public interface ILearningPath : IRepo<LearningPath>
     {
 
     }

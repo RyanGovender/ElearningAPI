@@ -6,6 +6,7 @@ using ElearningProjectBusiness.Implementation.Global;
 using ElearningProjectModels.Models;
 using ElearningProjectRepository.Implementation;
 using ElearningProjectServices.Interface;
+using ElearningProjectServices.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,8 @@ namespace ElearningProjectAdminAPI.Controllers
         {
             if (learningPath == null) return StatusCode(400,false);
             var result = await _unitOfWork.LearningPathService.Inset(learningPath);
-            return result ? StatusCode(200, result) : StatusCode(400, result);
+            var status = ControllerService.GetIActionResult(result);// A switch statment that creates a status objected based on the result from the previous method.
+            return StatusCode(status.StatusCode, status.Response);
         }
 
         [HttpPut]
@@ -45,31 +47,19 @@ namespace ElearningProjectAdminAPI.Controllers
         {
             if (learningPath == null) return StatusCode(400);
             var result = await _unitOfWork.LearningPathService.Update(learningPath);
-            Elastic.LogInformation(learningPath,learningPath);
-            return result ? StatusCode(200, result) : StatusCode(400, result);
+            // Elastic.LogInformation(learningPath,learningPath);
+            var status = ControllerService.GetIActionResult(result);// A switch statment that creates a status objected based on the result from the previous method.
+            return StatusCode(status.StatusCode, status.Response);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task<IActionResult> Delete(int?id)
-        {
-            if (!id.HasValue) return StatusCode(400,false);
-            var result = await _unitOfWork.LearningPathService.Delete(id);
-            return result ? StatusCode(200, result) : StatusCode(404, result);
-        }
+        //[HttpDelete]
+        //[Route("Delete")]
+        //public async Task<IActionResult> Delete(int?id)
+        //{
+        //    if (!id.HasValue) return StatusCode(400,false);
+        //    var result = await _unitOfWork.LearningPathService.Delete(id);
+        //    return result ? StatusCode(200, result) : StatusCode(404, result);
+        //}
 
-        [HttpGet] //Random Test Method for knockout project
-        [Route("GetAll")]
-        public List<Products> GetAll()
-        {
-            var data = new List<Products>() {
-
-                new Products(1,"Xbox one",2500,50),
-                new Products(2,"Xbox One S",3500,40),
-                new Products(3,"PS4",4000,35)
-            };
-
-            return data;
-        }
     }
 }
