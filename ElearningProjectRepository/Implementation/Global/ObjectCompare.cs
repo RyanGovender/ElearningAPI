@@ -11,6 +11,7 @@ namespace ElearningProjectRepository.Implementation.Global
         public string Property { get; set; }
         public object CurrentObject { get; set; }
         public object NewObject { get; set; }
+
     }
 
     public static class ObjectCompare

@@ -3,6 +3,9 @@ using ElearningProjectModels.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Web;
+
 
 namespace ElearningProjectRepository.Implementation.Global
 {
@@ -11,23 +14,32 @@ namespace ElearningProjectRepository.Implementation.Global
         private static readonly string _objectLoggerName = "objectchangelogger";
         //response from executed task
         //objectChangeDetails the result of the object compare
-        public static void LogInformation<T>(T current, T newObject, string response, string methodName) where T : class
+        //For updates to any object
+        public static void LogInformation<T>(T current, T newObject, string response, string methodName, string userID) where T : class
         {
             var objectResult = ObjectCompare.CompareObjects(current, newObject).ToString();
-            LogInformation(response, objectResult, methodName);
+            LogInformation(response, objectResult, methodName, userID);
         }
 
-        public static void LogInformation(string response, string objectChangeDetails, string methodName)
+       // To convert an Insert into Object logger...does not do an object compare.
+        public static void LogInformation<T>(T newObject, string response, string methodName, string userID) where T : class
         {
-            var _loggingItem = new ObjectLogger() { 
+            var jsonObject = JsonSerializer.Serialize(newObject);
+            LogInformation(response, jsonObject, methodName, userID);
+        }
+
+        public static void LogInformation(string response, string objectChangeDetails, string methodName, string userID)
+        {
+            var _loggingItem = new ObjectLogger()
+            {
                 CreatedDate = DateTime.Now,
-                ResponseMessage =  response ,
+                ResponseMessage = response,
                 ChangedObjectDetails = objectChangeDetails,
                 IPAdress = Network.GetLocalIPAddress(),
                 MethodName = methodName,
-                UserID = "7893247-342-3243-324" //in future get userid from jwt
+                UserID = userID //in future get userid from jwt
             };
-            ElasticLogic<ObjectLogger>.AddToIndex(_loggingItem,_objectLoggerName);
+            ElasticLogic<ObjectLogger>.AddToIndex(_loggingItem, _objectLoggerName);
         }
     }
 }

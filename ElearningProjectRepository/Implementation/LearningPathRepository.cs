@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static ElearningProjectModels.Enum.Enum;
@@ -33,7 +34,7 @@ namespace ElearningProjectRepository.Implementation
                    @ModifiedDate = DateTime.Now };
 
             var result = await _dapperBaseRepository.Excute("sp_AddLearningPath",parameters);
-
+            Elastic.LogInformation(model, EnumHelper.GetEnumValue(EnumHelper.SystemEnums.Status,result) , MethodBase.GetCurrentMethod().DeclaringType.FullName , "UserIDHERE");
             return result;
 
         }
@@ -41,7 +42,6 @@ namespace ElearningProjectRepository.Implementation
         public async Task<int> DeleteAsync(int? id)
         {
             var parameters = new { @Id = id };
-
             var result = await _dapperBaseRepository.Excute("sp_DeleteLearningPath", parameters);
 
             return result;
@@ -50,7 +50,6 @@ namespace ElearningProjectRepository.Implementation
         public async Task<IQueryable<LearningPath>> GetAll()
         {
             var result = await _dapperBaseRepository.Query<LearningPath>("sp_GetAllLearningPath", null);
-
             return result;
         }
 
@@ -66,16 +65,10 @@ namespace ElearningProjectRepository.Implementation
                 @ModifiedDate = DateTime.Now
             };
 
-
-
-            //execute find method to get current details  (async dont await) 
+            //execute find method to get current details  (async dont await)
             var currentObject = Find(model.Id);
             var result = await _dapperBaseRepository.Excute("sp_UpdateLearningPath", parameters);
-            Elastic.LogInformation(await currentObject, model, ((Status)result).ToString(), "UpdateLearingPath");
-
-            //ObjectCompare
-            //object compare
-            //log here
+            Elastic.LogInformation(await currentObject, model, EnumHelper.GetEnumValue(EnumHelper.SystemEnums.Status, result), MethodBase.GetCurrentMethod().DeclaringType.FullName,"userIDHERE");
 
             return result;
 
